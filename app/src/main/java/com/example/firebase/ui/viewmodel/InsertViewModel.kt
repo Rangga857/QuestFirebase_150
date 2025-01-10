@@ -19,6 +19,20 @@ class InsertViewModel (
             insertUiEvent = mahasiswaEvent
         )
     }
+
+    fun validateFields():Boolean{
+        val event = uiEvent.insertUiEvent
+        val erorState = FormErrorState(
+            nim = if (event.nim.isNotEmpty()) null else "NIM tidak boleh kosong",
+            nama = if (event.nama.isNotEmpty()) null else " Nama tidak boleh kosong",
+            jenisKelamin = if(event.jenisKelamin.isNotEmpty()) null else "Jenis kelamin tidak boleh kosong",
+            alamat = if(event.alamat.isNotEmpty()) null else "Alamat tidak boleh kosong",
+            kelas = if(event.kelas.isNotEmpty()) null else "Kelas tidak boleh kosong",
+            angkatan = if(event.angkatan.isNotEmpty()) null else "Angkatan tidak boleh kosong"
+        )
+        uiEvent =uiEvent.copy(isEntryValid = erorState)
+        return erorState.isValid()
+    }
 }
 sealed class FormState{
     object Idle : FormState()

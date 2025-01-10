@@ -45,9 +45,8 @@ class NetworkRepository (
 
     override fun getAllMhs(): Flow<List<Mahasiswa>> = callbackFlow {
        val mhsCollection = firestore.collection("Mahasiswa")
-            .orderBy("nim", Query.Direction.ASCENDING)
-            .addSnapshotListener{
-                value, error ->
+            .orderBy("nim", Query.Direction.DESCENDING)
+            .addSnapshotListener{ value, error ->
                 if (value != null) {
                     val mhsList = value.documents.mapNotNull {
                         //Convert dari document firestore ke dataclass

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "694092795677",
+    "project_id": "mobilelanjutpam",
+    "storage_bucket": "mobilelanjutpam.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694092795677:android:03e4bf5455a3866e975bf4",
+        "android_client_info": {
+          "package_name": "com.example.firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDpaJN8npQW6yRtHfZ5c_vjEgJhw91Fh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

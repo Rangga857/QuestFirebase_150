@@ -17,7 +17,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.firebase.ui.viewmodel.FormErrorState
+import com.example.firebase.ui.viewmodel.FormState
+import com.example.firebase.ui.viewmodel.HomeUiState
+import com.example.firebase.ui.viewmodel.InsertUiState
 import com.example.firebase.ui.viewmodel.MahasiswaEvent
+
+@Composable
+fun InsertBodyMhs(
+    modifier: Modifier = Modifier,
+    onValueChange: (MahasiswaEvent) -> Unit,
+    uiState : InsertUiState,
+    onClick: () -> Unit,
+    homeUiState: FormState
+){
+
+}
 
 @Composable
 fun FormMahasiswa(

@@ -30,7 +30,13 @@ fun InsertBodyMhs(
     onClick: () -> Unit,
     homeUiState: FormState
 ){
+    Column (
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
 
+    }
 }
 
 @Composable

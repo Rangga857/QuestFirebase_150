@@ -87,7 +87,7 @@ fun HomeScreen(
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
-                viewModel.getMhs()
+                viewModel.deleteMhs(it)
             }
         )
     }
@@ -114,9 +114,11 @@ fun HomeStatus(
                 listMhs = homeUiState.data,
                 modifier = modifier.fillMaxWidth(),
                 onClick = { onDetailClick(it) },
-                onDelete = { onDeleteClick(it) }
+                onDelete = { mahasiswa ->
+                    deleteConfirm = mahasiswa
+                    }
                 )
-            deleteConfirm?.let { data ->
+                deleteConfirm?.let { data ->
                 DeleteConfirmationDialog(
                     onDeleteConfirm = {
                         onDeleteClick(data)
@@ -124,7 +126,8 @@ fun HomeStatus(
                     },
                     onDeleteCancel = {
                         deleteConfirm = null
-                    })
+                    }
+                )
             }
         }
         is HomeUiState.Error -> {

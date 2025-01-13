@@ -10,4 +10,7 @@
 ![Screenshot 2025-01-13 124836](https://github.com/user-attachments/assets/7dfd0d5f-eb8d-4b66-b8af-c4fde6b0a794)
 # **Update Halaman Mobile setelah data dihapus**
 ![Screenshot 2025-01-13 124844](https://github.com/user-attachments/assets/ef7e49a8-5fed-4cf6-b150-84384fbf767b)
+# **Detail Halaman Mobile**
+![Screenshot 2025-01-13 170155](https://github.com/user-attachments/assets/5b650977-7e4c-4243-b27c-0961c660c2c5)
+
 

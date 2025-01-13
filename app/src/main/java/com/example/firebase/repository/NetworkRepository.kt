@@ -1,5 +1,6 @@
 package com.example.firebase.repository
 
+import android.util.Log
 import com.example.firebase.model.Mahasiswa
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -67,17 +68,50 @@ class NetworkRepository (
     }
 
     override fun getMhs(nim: String): Flow<Mahasiswa> = callbackFlow {
-        val mhsDocument = firestore.collection("Mahasiswa")
-            .document(nim)
-            .addSnapshotListener{
-                value, error ->
-                if (value != null){
-                    val mhs = value.toObject(Mahasiswa::class.java)!!
-                    trySend(mhs)
-                }
+        val mhsCollection = firestore.collection("Mahasiswa")
+            .whereEqualTo("nim", nim) // Query based on the "nim" field
+
+        mhsCollection.addSnapshotListener { querySnapshot, error ->
+            if (error != null) {
+                // Log error and close the flow
+                Log.e("Firestore", "Error fetching documents: $error")
+                close(error)
+                return@addSnapshotListener
             }
-        awaitClose{
-            mhsDocument.remove()
+
+            querySnapshot?.let {
+                // If documents are found
+                if (!it.isEmpty) {
+                    for (document in it.documents) {
+                        // Log raw data for debugging
+                        Log.d("Firestore", "Document Data: ${document.data}")
+
+                        // Attempt to map the document to the Mahasiswa object
+                        val mhs = document.toObject(Mahasiswa::class.java)
+                        if (mhs != null) {
+                            // Successfully mapped Mahasiswa object
+                            trySend(mhs)
+                        } else {
+                            // Log mapping failure and close the flow
+                            Log.e("Firestore", "Failed to map document to Mahasiswa")
+                            close(Exception("Document data is invalid or null"))
+                        }
+                    }
+                } else {
+                    // Handle case where no document is found
+                    Log.e("Firestore", "No documents found for nim: $nim")
+                    close(Exception("No documents found for nim: $nim"))
+                }
+            } ?: run {
+                // Handle case where snapshot is null
+                Log.e("Firestore", "No documents found for nim: $nim")
+                close(Exception("No documents found for nim: $nim"))
+            }
+        }
+
+        // Remove the listener when the flow is closed
+        awaitClose {
+            // Firestore will automatically handle cleanup
         }
     }
 }

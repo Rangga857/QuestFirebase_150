@@ -16,7 +16,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -85,7 +87,7 @@ fun HomeScreen(
             homeUiState = viewModel.mhsUIState,
             retryAction = { viewModel.getMhs() },
             modifier = Modifier.padding(innerPadding),
-            onDetailClick = onDetailClick,
+            onDetailClick = {onDetailClick(it)},
             onDeleteClick = {
                 viewModel.deleteMhs(it)
             }
@@ -224,6 +226,14 @@ fun CardMhs(
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
+
+                Spacer(modifier = Modifier.padding(4.dp))
+                IconButton(onClick = {
+                    onDelete(mhs)
+                }) {
+                    Icon(imageVector = Icons.Default.Delete,
+                        contentDescription = "")
+                }
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -237,14 +247,22 @@ fun CardMhs(
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
                 )
-                Spacer(modifier = Modifier.padding(4.dp))
-                IconButton(onClick = {
-                    onDelete(mhs)
-                }) {
-                    Icon(imageVector = Icons.Default.Delete,
-                        contentDescription = "")
-                }
             }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(imageVector = Icons.Filled.List,
+                    contentDescription = "")
+                Spacer(modifier = Modifier.padding(4.dp))
+                Text(
+                    text = mhs.judulskripsi,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+            }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
